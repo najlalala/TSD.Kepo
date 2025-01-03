@@ -1,0 +1,109 @@
+{% extends "base 3.html" %}
+
+{% block title %}Pencarian Data{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center">Kepoin dia</h2>
+    
+    <form method="POST" class="text-center mb-4">
+        <input type="text" name="search_query" placeholder="Cari nama atau NIM..." required class="form-input">
+        <button type="submit" class="btn btn-primary">Cari</button>
+    </form>
+    
+    {% if results %}
+        <h3>Hasil Pencarian:</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Angkatan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif results is not none %}
+        <p>Tidak ada data ditemukan.</p>
+    {% endif %}
+    
+</div>
+
+<style>
+    .container {
+        background-color: #f8f9fa;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        border: none;
+        border-radius: 5px;
+        padding: 12px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary {
+        background-color: #ed97f4;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #94449a;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+</style>
+{% endblock %}
